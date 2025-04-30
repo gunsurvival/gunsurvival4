@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://bt6akfa137g4w"]
+
+[ext_resource type="PackedScene" uid="uid://t46jufw1t16a" path="res://src/entity/player.tscn" id="1_itxqv"]
+[ext_resource type="Script" uid="uid://dlrou2yidobgu" path="res://src/main.gd" id="1_v0l8b"]
+[ext_resource type="Script" uid="uid://bnxagjs84a65j" path="res://src/system/spawn_mob.gd" id="3_wp4xf"]
+[ext_resource type="Script" uid="uid://bc5favg85nct8" path="res://src/system/controller.gd" id="4_brvut"]
+[ext_resource type="PackedScene" uid="uid://cij5cwmh1djkb" path="res://src/entity/wolf.tscn" id="5_0ha60"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_v0l8b")
+
+[node name="spawn_mob" type="Node" parent="." node_paths=PackedStringArray("entities")]
+script = ExtResource("3_wp4xf")
+entities = NodePath("../entities")
+
+[node name="Timer" type="Timer" parent="spawn_mob"]
+wait_time = 5.0
+autostart = true
+
+[node name="controller" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("4_brvut")
+player = NodePath("../entities/player")
+
+[node name="entities" type="Node" parent="."]
+
+[node name="wolf" parent="entities" instance=ExtResource("5_0ha60")]
+position = Vector2(135, -136)
+
+[node name="player" parent="entities" instance=ExtResource("1_itxqv")]
+position = Vector2(-1, 0)
+
+[node name="Camera2D" type="Camera2D" parent="entities/player"]
+process_callback = 0
+position_smoothing_enabled = true
+
+[connection signal="timeout" from="spawn_mob/Timer" to="spawn_mob" method="_on_timer_timeout"]

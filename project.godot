@@ -13,7 +13,8 @@ config_version=5
 config/name="test topdown"
 run/main_scene="uid://bt6akfa137g4w"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://dbyitlefc6ow8"
+boot_splash/icon="res://icon.svg"
 
 [dotnet]
 
@@ -21,7 +22,7 @@ project/assembly_name="test topdown"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
+enabled=PackedStringArray("res://addons/SimpleFormatOnSave/plugin.cfg")
 
 [input]
 
