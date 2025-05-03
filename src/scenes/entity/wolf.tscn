@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://cij5cwmh1djkb"]
+
+[ext_resource type="Script" uid="uid://bwif73ppssc4c" path="res://src/scripts/entity/wolf.gd" id="1_47xl0"]
+[ext_resource type="PackedScene" uid="uid://barbv746hxtac" path="res://src/scenes/components/velocity_component.tscn" id="2_0jou6"]
+[ext_resource type="Texture2D" uid="uid://b2xqopttkhjkn" path="res://assets/wolf.png" id="2_m3tth"]
+[ext_resource type="PackedScene" uid="uid://4ucqea8t27qx" path="res://src/scenes/components/mob_movement.tscn" id="3_0jou6"]
+[ext_resource type="PackedScene" uid="uid://41yqj0q6h5v7" path="res://src/scenes/components/stats_component.tscn" id="4_3almi"]
+[ext_resource type="PackedScene" uid="uid://dxcvcw5qb66rq" path="res://src/scenes/components/hurtbox_component.tscn" id="5_8tkg6"]
+[ext_resource type="PackedScene" uid="uid://bt3rmvvkca022" path="res://src/scenes/components/pathfind_component.tscn" id="6_72gs6"]
+[ext_resource type="PackedScene" uid="uid://canfgagfwyjot" path="res://src/scenes/components/animation/animation_pulse.tscn" id="6_m3tth"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2pstq"]
+radius = 48.0
+
+[node name="Wolf" type="Node2D"]
+z_index = 10
+script = ExtResource("1_47xl0")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_0jou6")]
+
+[node name="AnimationPulse" parent="." instance=ExtResource("6_m3tth")]
+
+[node name="Sprite2D" parent="AnimationPulse" index="0"]
+texture = ExtResource("2_m3tth")
+
+[node name="StatsComponent" parent="." instance=ExtResource("4_3almi")]
+stats = {
+&"food": 100,
+&"health": 100,
+&"speed": 150,
+&"warm": 100,
+&"water": 100
+}
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("5_8tkg6")]
+
+[node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
+shape = SubResource("CircleShape2D_2pstq")
+
+[node name="PathfindComponent" parent="." instance=ExtResource("6_72gs6")]
+
+[node name="ActionTimer" parent="PathfindComponent" instance=ExtResource("3_0jou6")]
+script = null
+
+[node name="MobMovement" parent="." node_paths=PackedStringArray("velocity_component", "stats_component") instance=ExtResource("3_0jou6")]
+velocity_component = NodePath("../VelocityComponent")
+stats_component = NodePath("../StatsComponent")
+
+[editable path="AnimationPulse"]
+[editable path="HurtboxComponent"]

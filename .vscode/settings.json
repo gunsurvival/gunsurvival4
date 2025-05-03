@@ -1,9 +1,9 @@
 {
-  "godotTools.editorPath.godot4": "d:\\godot\\Godot_v4.4.1-stable_win64.exe",
-  "files.exclude": {
-    "**/*.uid": true,
-    "**/*.import": true,
-    "**/*.tmp": true,
-    "**/*.tscn": true
-  }
+	"godotTools.editorPath.godot4": "d:\\Godot_v4.4.1-stable_mono_win64\\Godot_v4.4.1-stable_mono_win64.exe",
+	"files.exclude": {
+		"**/*.uid": true,
+		"**/*.import": true,
+		"**/*.tmp": true,
+		"**/*.tscn": true
+	}
 }

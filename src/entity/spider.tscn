@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://djaoeh446m65a"]
-
-[ext_resource type="Script" uid="uid://dn5bxe3sk08cf" path="res://src/scripts/spider.gd" id="1_bxjw4"]
-
-[node name="Spider" type="Node2D"]
-script = ExtResource("1_bxjw4")

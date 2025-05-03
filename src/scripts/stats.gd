@@ -1,5 +1,5 @@
 extends Node
-class_name Stats
+class_name StatsComponent
 
 @export var max_stats := {
 		speed = 300,
@@ -21,8 +21,7 @@ class_name Stats
 
 var effects: Array[Effect] = []
 
-func _ready() -> void:
-		print(stats, current_stats)
+func _ready() -> void:  
 		pass
 
 

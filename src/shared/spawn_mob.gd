@@ -2,7 +2,7 @@ extends Node
 
 const MOB_COUNT = 5
 @export var entities: Node
-var WolfScene = preload("res://src/entity/wolf.tscn")
+var WolfScene = preload("res://src/scenes/entity/wolf.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -15,7 +15,6 @@ func _ready() -> void:
 		mob.position = Vector2(
 			randf_range(0, 800), # example x range
 			randf_range(0, 600), # example y range
-
 		)
 
 		entities.add_child(mob)
