@@ -20,3 +20,7 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		pass
+
+
+func _on_hurtbox_component_received_damage(damage: int) -> void:
+	pass # Replace with function body.

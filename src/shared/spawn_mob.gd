@@ -1,6 +1,6 @@
 extends Node
 
-const MOB_COUNT = 5
+const MOB_COUNT = 0
 @export var entities: Node
 var WolfScene = preload("res://src/scenes/entity/wolf.tscn")
 

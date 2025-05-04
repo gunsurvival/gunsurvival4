@@ -22,7 +22,6 @@ entities = NodePath("../entities")
 
 [node name="Timer" type="Timer" parent="spawn_mob"]
 wait_time = 5.0
-autostart = true
 
 [node name="controller" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("3_fyndt")
@@ -37,10 +36,6 @@ position = Vector2(-1, 0)
 process_callback = 0
 position_smoothing_enabled = true
 
-[node name="Wolf" parent="entities" instance=ExtResource("5_0ha60")]
-
-[node name="Spider" parent="entities" instance=ExtResource("6_kmhfv")]
-
 [node name="Rock" parent="entities" instance=ExtResource("7_rlaii")]
 position = Vector2(339, -167)
 
@@ -53,7 +48,13 @@ position = Vector2(-209, -188)
 [node name="Bush2" parent="entities" instance=ExtResource("8_5mrjc")]
 position = Vector2(-252, 130)
 
+[node name="Spider" parent="entities" instance=ExtResource("6_kmhfv")]
+position = Vector2(-35, 290)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fyndt")
+
+[node name="Wolf" parent="." instance=ExtResource("5_0ha60")]
+position = Vector2(232, 225)
 
 [connection signal="timeout" from="spawn_mob/Timer" to="spawn_mob" method="_on_timer_timeout"]

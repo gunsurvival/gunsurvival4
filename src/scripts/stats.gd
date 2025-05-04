@@ -25,7 +25,7 @@ func _ready() -> void:
 		pass
 
 
-func update_stat(stat_name: String, value: int) -> void:
+func set_stat(stat_name: String, value: int) -> void:
 		if not current_stats.has(stat_name):
 				push_warning("Stat does not exist: " + stat_name)
 				return

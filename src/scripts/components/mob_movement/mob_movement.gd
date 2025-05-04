@@ -1,13 +1,9 @@
-extends Node2D
+extends Node
 class_name MobMovement
-
-enum Action {
-	ACTION_IDLE,
-	ACTION_MOVE
-}
 
 @export var velocity_component: VelocityComponent
 @export var stats_component: StatsComponent
+@onready var state_machine: StateMachine = $StateMachine
 
 var toRotation: float = 0
 var currentSpeed: float = 0
@@ -19,23 +15,11 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:	
 	velocity_component.velocity.x = cos(toRotation) * currentSpeed
 	velocity_component.velocity.y = sin(toRotation) * currentSpeed
 
 
 func _on_timer_timeout() -> void:
-	var random_state = randi() % Action.size()
-	locker = !locker
-	if locker:
-		currentSpeed = 0
-		return
-
-	match random_state:
-		Action.ACTION_IDLE:
-			toRotation = randf_range(0, 2*PI)
-			currentSpeed = 0
-
-		Action.ACTION_MOVE:
-			toRotation = randf_range(0, 2*PI)
-			currentSpeed = (randi() % 2) * stats_component.get_stat("speed")
+	if state_machine.state.has_method("_on_timer_timeout"):
+		state_machine.state._on_timer_timeout()

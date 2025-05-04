@@ -1,12 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://t46jufw1t16a"]
 
-[ext_resource type="Shader" uid="uid://c5cqg4mdkdcsk" path="res://shader/flash.gdshader" id="1_fvtld"]
+[ext_resource type="Shader" uid="uid://c5cqg4mdkdcsk" path="res://src/shader/flash.gdshader" id="1_fvtld"]
 [ext_resource type="Script" uid="uid://cehj2cc0g5j4x" path="res://src/scripts/entity/player.gd" id="1_hjaqi"]
 [ext_resource type="Texture2D" uid="uid://b3ci7mxjov6n6" path="res://assets/terrorist.png" id="1_xo3ru"]
 [ext_resource type="PackedScene" uid="uid://barbv746hxtac" path="res://src/scenes/components/velocity_component.tscn" id="3_e6rp7"]
 [ext_resource type="PackedScene" uid="uid://uepcmckw8wjr" path="res://src/scenes/components/weapon/weapon.tscn" id="3_n8xtm"]
 [ext_resource type="PackedScene" uid="uid://41yqj0q6h5v7" path="res://src/scenes/components/stats_component.tscn" id="4_2lu4m"]
-[ext_resource type="PackedScene" uid="uid://c443w28ln1e44" path="res://src/scenes/components/hitbox_component.tscn" id="5_n8xtm"]
 [ext_resource type="PackedScene" uid="uid://dxcvcw5qb66rq" path="res://src/scenes/components/hurtbox_component.tscn" id="6_kenlx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ct4mp"]
@@ -15,21 +14,14 @@ shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_value = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n8xtm"]
-radius = 34.1321
+radius = 33.0606
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e6rp7"]
+radius = 32.3883
 
 [node name="Player" type="CharacterBody2D"]
 material = SubResource("ShaderMaterial_ct4mp")
 script = ExtResource("1_hjaqi")
-
-[node name="Weapon" parent="." instance=ExtResource("3_n8xtm")]
-
-[node name="VelocityComponent" parent="." instance=ExtResource("3_e6rp7")]
-
-[node name="StatsComponent" parent="." instance=ExtResource("4_2lu4m")]
-
-[node name="HitboxComponent" parent="." instance=ExtResource("5_n8xtm")]
-
-[node name="HurtboxComponent" parent="." instance=ExtResource("6_kenlx")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.0583617, 0.0583617)
@@ -37,3 +29,17 @@ texture = ExtResource("1_xo3ru")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_n8xtm")
+
+[node name="Weapon" parent="." instance=ExtResource("3_n8xtm")]
+
+[node name="VelocityComponent" parent="." instance=ExtResource("3_e6rp7")]
+
+[node name="StatsComponent" parent="." instance=ExtResource("4_2lu4m")]
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("6_kenlx")]
+stats_component = NodePath("../StatsComponent")
+
+[node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
+shape = SubResource("CircleShape2D_e6rp7")
+
+[editable path="HurtboxComponent"]

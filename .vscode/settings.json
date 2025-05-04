@@ -3,7 +3,7 @@
 	"files.exclude": {
 		"**/*.uid": true,
 		"**/*.import": true,
-		"**/*.tmp": true,
-		"**/*.tscn": true
+		"**/*.tmp": true
+		// "**/*.tscn": true
 	}
 }
