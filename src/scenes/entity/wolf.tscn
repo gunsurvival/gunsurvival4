@@ -92,9 +92,6 @@ shape = SubResource("CircleShape2D_2pstq")
 
 [node name="PathfindComponent" parent="." instance=ExtResource("6_72gs6")]
 
-[node name="ActionTimer" parent="PathfindComponent" instance=ExtResource("3_0jou6")]
-script = null
-
 [node name="MobMovement" parent="." node_paths=PackedStringArray("velocity_component", "stats_component") instance=ExtResource("3_0jou6")]
 velocity_component = NodePath("../VelocityComponent")
 stats_component = NodePath("../StatsComponent")

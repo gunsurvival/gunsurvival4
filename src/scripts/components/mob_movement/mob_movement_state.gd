@@ -11,7 +11,7 @@ var mob_movement: MobMovement
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("ready", self.name)
+	print(owner)
 	await owner.ready
 	mob_movement = owner as MobMovement
 	# print(mob_movement, self.name)
