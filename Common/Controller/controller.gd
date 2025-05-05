@@ -14,4 +14,7 @@ func _process(_delta: float) -> void:
 	var screen_center = get_viewport().size / 2
 	var toAngle = atan2(mousePos[1] - screen_center[1], mousePos[0] - screen_center[0])
 	player.rotation = lerp_angle(player.rotation, toAngle, 0.1)
-	player.velocity_component.velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down") * player.stats_component.get_stat("speed")
+	player.velocity_component.velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down") * player.stats_component.stats.speed
+
+	if Input.is_action_just_pressed("left_click"):
+		player.item_manager.use_items()

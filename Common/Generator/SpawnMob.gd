@@ -2,7 +2,7 @@ extends Node
 
 const MOB_COUNT = 0
 @export var entities: Node
-const WolfScene = preload("res://Entities/Wolf/wolf.tscn")
+const WolfScene = preload("res://Entities/Organisms/Wolf/Wolf.tscn")
 
 
 # Called when the node enters the scene tree for the first time.

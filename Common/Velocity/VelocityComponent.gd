@@ -10,13 +10,12 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	# Example of how to use the velocity component
-	# Assuming 'velocity' is a Vector2 property of the node
-	# and you want to move the node based on its velocity
-	if get_parent() is CharacterBody2D:
-		(get_parent() as CharacterBody2D).velocity = velocity
+	if owner is CharacterBody2D:
+		(owner as CharacterBody2D).velocity = velocity
+	else: if owner is Node2D:
+		(owner as Node2D).position += velocity * delta
 	else:
-		get_parent().position += velocity * delta
+		print(owner, " is not Node2D")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
