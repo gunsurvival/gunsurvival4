@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://b10uvnaxmm5mv"]
 
-[ext_resource type="Texture2D" uid="uid://dntk5vrm3d46a" path="res://Assets/Bush.png" id="1_rok7y"]
-[ext_resource type="Script" uid="uid://dnk45rbnqjfjj" path="res://Entities/Bush/bush.gd" id="1_tii4b"]
-[ext_resource type="Animation" uid="uid://8oxcyvo0jwir" path="res://Common/Animations/shake.res" id="3_0kxdj"]
+[ext_resource type="Texture2D" uid="uid://dntk5vrm3d46a" path="res://Entities/Environment/Bush/Art/Bush.png" id="1_rok7y"]
+[ext_resource type="Script" uid="uid://dnk45rbnqjfjj" path="res://Entities/Environment/Bush/Bush.gd" id="1_tii4b"]
+[ext_resource type="Animation" uid="uid://8oxcyvo0jwir" path="res://Common/Animations/Shake.res" id="3_0kxdj"]
 
 [sub_resource type="Animation" id="Animation_jdll5"]
 length = 0.001
