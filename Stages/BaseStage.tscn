@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://bt6akfa137g4w"]
 
-[ext_resource type="PackedScene" uid="uid://t46jufw1t16a" path="res://Entities/Terrorist/player.tscn" id="1_itxqv"]
-[ext_resource type="Script" uid="uid://dlrou2yidobgu" path="res://Stages/main.gd" id="1_v0l8b"]
-[ext_resource type="Script" uid="uid://bnxagjs84a65j" path="res://Common/Generator/spawn_mob.gd" id="2_fyndt"]
-[ext_resource type="Script" uid="uid://bc5favg85nct8" path="res://Common/Controller/controller.gd" id="3_fyndt"]
-[ext_resource type="PackedScene" uid="uid://cij5cwmh1djkb" path="res://Entities/Wolf/wolf.tscn" id="5_0ha60"]
-[ext_resource type="PackedScene" uid="uid://djaoeh446m65a" path="res://Entities/Spider/spider.tscn" id="6_kmhfv"]
-[ext_resource type="PackedScene" uid="uid://by7mb3h7bfsxf" path="res://Entities/Rock/rock.tscn" id="7_rlaii"]
-[ext_resource type="PackedScene" uid="uid://b10uvnaxmm5mv" path="res://Entities/Bush/bush.tscn" id="8_5mrjc"]
+[ext_resource type="PackedScene" uid="uid://t46jufw1t16a" path="res://Entities/Organisms/Player/Player.tscn" id="1_itxqv"]
+[ext_resource type="Script" uid="uid://dlrou2yidobgu" path="res://Stages/BaseStage.gd" id="1_v0l8b"]
+[ext_resource type="Script" uid="uid://bnxagjs84a65j" path="res://Common/Generator/SpawnMob.gd" id="2_fyndt"]
+[ext_resource type="Script" uid="uid://bc5favg85nct8" path="res://Common/Controller/Controller.gd" id="3_fyndt"]
+[ext_resource type="PackedScene" uid="uid://cij5cwmh1djkb" path="res://Entities/Organisms/Wolf/Wolf.tscn" id="5_0ha60"]
+[ext_resource type="PackedScene" uid="uid://djaoeh446m65a" path="res://Entities/Organisms/Spider/Spider.tscn" id="6_kmhfv"]
+[ext_resource type="PackedScene" uid="uid://by7mb3h7bfsxf" path="res://Entities/Environment/Rock/Rock.tscn" id="7_rlaii"]
+[ext_resource type="PackedScene" uid="uid://b10uvnaxmm5mv" path="res://Entities/Environment/Bush/Bush.tscn" id="8_5mrjc"]
 
 [sub_resource type="Environment" id="Environment_fyndt"]
 background_mode = 1
