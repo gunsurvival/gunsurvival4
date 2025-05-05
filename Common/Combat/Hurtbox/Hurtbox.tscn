@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxcvcw5qb66rq"]
+
+[ext_resource type="Script" uid="uid://bpu5v1yth5o11" path="res://Common/Combat/Hurtbox/Hurtbox.gd" id="1_e8d2t"]
+
+[node name="Hurtbox" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_e8d2t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+debug_color = Color(2.21401e-06, 0.624474, 0.528705, 0.42)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
