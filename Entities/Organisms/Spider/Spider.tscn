@@ -1,0 +1,83 @@
+[gd_scene load_steps=14 format=3 uid="uid://djaoeh446m65a"]
+
+[ext_resource type="Script" uid="uid://dn5bxe3sk08cf" path="res://Entities/Organisms/Spider/Spider.gd" id="1_bxjw4"]
+[ext_resource type="PackedScene" uid="uid://barbv746hxtac" path="res://Common/Velocity/VelocityComponent.tscn" id="2_m8vx2"]
+[ext_resource type="Texture2D" uid="uid://bamwsqqjqhjt" path="res://Entities/Organisms/Spider/Art/spider.png" id="2_m66c0"]
+[ext_resource type="PackedScene" uid="uid://c443w28ln1e44" path="res://Common/Combat/Hitbox/Hitbox.tscn" id="4_8c2cm"]
+[ext_resource type="PackedScene" uid="uid://4ucqea8t27qx" path="res://Common/AI/MobMovement.tscn" id="5_7x44o"]
+[ext_resource type="Resource" uid="uid://bbpdxs7yx7bie" path="res://Entities/Organisms/Spider/Data/SpiderStats.tres" id="5_ps66m"]
+[ext_resource type="PackedScene" uid="uid://bt3rmvvkca022" path="res://Common/AI/Pathfind.tscn" id="6_b4xjd"]
+[ext_resource type="PackedScene" uid="uid://41yqj0q6h5v7" path="res://Common/Combat/Stats/StatsComponent.tscn" id="7_8xkrg"]
+[ext_resource type="PackedScene" uid="uid://dxcvcw5qb66rq" path="res://Common/Combat/Hurtbox/Hurtbox.tscn" id="9_ps66m"]
+
+[sub_resource type="Animation" id="Animation_3b622"]
+resource_name = "idle"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b4xjd"]
+_data = {
+&"idle": SubResource("Animation_3b622")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ps66m"]
+radius = 30.0
+height = 76.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pojgy"]
+radius = 62.0
+height = 136.0
+
+[node name="Spider" type="Node2D"]
+script = ExtResource("1_bxjw4")
+
+[node name="View" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="View"]
+position = Vector2(29, -2)
+texture = ExtResource("2_m66c0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="View/Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_b4xjd")
+}
+autoplay = "idle"
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_m8vx2")]
+
+[node name="StatsComponent" parent="." instance=ExtResource("7_8xkrg")]
+stats = ExtResource("5_ps66m")
+
+[node name="MobMovement" parent="." node_paths=PackedStringArray("velocity_component", "stats_component") instance=ExtResource("5_7x44o")]
+velocity_component = NodePath("../VelocityComponent")
+stats_component = NodePath("../StatsComponent")
+
+[node name="PathfindComponent" parent="." instance=ExtResource("6_b4xjd")]
+
+[node name="Hitbox" parent="." instance=ExtResource("4_8c2cm")]
+damage = 20
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_ps66m")
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("9_ps66m")]
+stats_component = NodePath("../StatsComponent")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_pojgy")
+
+[editable path="Hitbox"]
+[editable path="Hurtbox"]

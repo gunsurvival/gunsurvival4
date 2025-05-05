@@ -1,0 +1,74 @@
+[gd_scene load_steps=17 format=3 uid="uid://t46jufw1t16a"]
+
+[ext_resource type="Shader" uid="uid://c5cqg4mdkdcsk" path="res://Common/Shaders/Flash.gdshader" id="1_fvtld"]
+[ext_resource type="Script" uid="uid://cehj2cc0g5j4x" path="res://Entities/Organisms/Player/Player.gd" id="1_hjaqi"]
+[ext_resource type="Texture2D" uid="uid://b3ci7mxjov6n6" path="res://Entities/Organisms/Player/Art/terrorist.png" id="1_xo3ru"]
+[ext_resource type="PackedScene" uid="uid://barbv746hxtac" path="res://Common/Velocity/VelocityComponent.tscn" id="3_e6rp7"]
+[ext_resource type="PackedScene" uid="uid://uepcmckw8wjr" path="res://Entities/Items/ItemManager.tscn" id="3_n8xtm"]
+[ext_resource type="PackedScene" uid="uid://41yqj0q6h5v7" path="res://Common/Combat/Stats/StatsComponent.tscn" id="4_2lu4m"]
+[ext_resource type="Animation" uid="uid://diwc4dvom6srn" path="res://Common/Animations/hit.res" id="5_bgh0x"]
+[ext_resource type="Resource" uid="uid://61q5o0vj4ab3" path="res://Entities/Organisms/Player/Data/PlayerStats.tres" id="5_snsoi"]
+[ext_resource type="PackedScene" uid="uid://dxcvcw5qb66rq" path="res://Common/Combat/Hurtbox/Hurtbox.tscn" id="6_kenlx"]
+[ext_resource type="PackedScene" uid="uid://b6o83k24iq0ip" path="res://Entities/Items/Tools/Sword/Sword.tscn" id="9_jcimk"]
+[ext_resource type="PackedScene" uid="uid://bl3nq5k5nte3g" path="res://UI/Healthbar/Healthbar.tscn" id="12_bgh0x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ct4mp"]
+shader = ExtResource("1_fvtld")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ivfk"]
+shader = ExtResource("1_fvtld")
+shader_parameter/flash_color = Color(0.694206, 0.0309057, 0.0171843, 1)
+shader_parameter/flash_value = 0.0
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fydvk"]
+_data = {
+&"hit": ExtResource("5_bgh0x")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n8xtm"]
+radius = 33.0606
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ivfk"]
+radius = 35.3553
+
+[node name="Player" type="CharacterBody2D"]
+material = SubResource("ShaderMaterial_ct4mp")
+script = ExtResource("1_hjaqi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_4ivfk")
+scale = Vector2(0.0583617, 0.0583617)
+texture = ExtResource("1_xo3ru")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_fydvk")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 1.00621)
+shape = SubResource("CircleShape2D_n8xtm")
+
+[node name="StatsComponent" parent="." instance=ExtResource("4_2lu4m")]
+stats = ExtResource("5_snsoi")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("3_e6rp7")]
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("6_kenlx")]
+stats_component = NodePath("../StatsComponent")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_4ivfk")
+
+[node name="ItemManager" parent="." instance=ExtResource("3_n8xtm")]
+
+[node name="Sword" parent="ItemManager" instance=ExtResource("9_jcimk")]
+
+[node name="Healthbar" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("12_bgh0x")]
+stats_component = NodePath("../StatsComponent")
+
+[connection signal="received_damage" from="Hurtbox" to="." method="_on_hurtbox_received_damage"]
+
+[editable path="Hurtbox"]

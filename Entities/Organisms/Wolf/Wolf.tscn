@@ -1,0 +1,122 @@
+[gd_scene load_steps=19 format=3 uid="uid://cij5cwmh1djkb"]
+
+[ext_resource type="Script" uid="uid://bwif73ppssc4c" path="res://Entities/Organisms/Wolf/Wolf.gd" id="1_47xl0"]
+[ext_resource type="PackedScene" uid="uid://barbv746hxtac" path="res://Common/Velocity/VelocityComponent.tscn" id="2_0jou6"]
+[ext_resource type="Texture2D" uid="uid://b2xqopttkhjkn" path="res://Entities/Organisms/Wolf/Art/wolf.png" id="2_m3tth"]
+[ext_resource type="Shader" uid="uid://c5cqg4mdkdcsk" path="res://Common/Shaders/Flash.gdshader" id="2_rrw1g"]
+[ext_resource type="PackedScene" uid="uid://4ucqea8t27qx" path="res://Common/AI/MobMovement.tscn" id="3_0jou6"]
+[ext_resource type="PackedScene" uid="uid://41yqj0q6h5v7" path="res://Common/Combat/Stats/StatsComponent.tscn" id="4_3almi"]
+[ext_resource type="Animation" uid="uid://diwc4dvom6srn" path="res://Common/Animations/hit.res" id="4_rrw1g"]
+[ext_resource type="PackedScene" uid="uid://dxcvcw5qb66rq" path="res://Common/Combat/Hurtbox/Hurtbox.tscn" id="5_8tkg6"]
+[ext_resource type="Resource" uid="uid://bshs4whosjp05" path="res://Entities/Organisms/Wolf/Data/WolfStats.tres" id="5_dwmll"]
+[ext_resource type="PackedScene" uid="uid://bt3rmvvkca022" path="res://Common/AI/Pathfind.tscn" id="6_72gs6"]
+[ext_resource type="PackedScene" uid="uid://c443w28ln1e44" path="res://Common/Combat/Hitbox/Hitbox.tscn" id="7_3almi"]
+[ext_resource type="PackedScene" uid="uid://bl3nq5k5nte3g" path="res://UI/Healthbar/Healthbar.tscn" id="10_m4nbs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rrw1g"]
+shader = ExtResource("2_rrw1g")
+shader_parameter/flash_color = Color(0.694206, 0.0309057, 0.0171843, 1)
+shader_parameter/flash_value = 0.0
+
+[sub_resource type="Animation" id="Animation_0jou6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/flash_value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3b622"]
+resource_name = "idle"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3almi"]
+_data = {
+&"RESET": SubResource("Animation_0jou6"),
+&"hit": ExtResource("4_rrw1g"),
+&"idle": SubResource("Animation_3b622")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dwmll"]
+radius = 33.2415
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m4nbs"]
+radius = 56.0357
+
+[node name="Wolf" type="Node2D"]
+z_index = 10
+script = ExtResource("1_47xl0")
+
+[node name="View" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="View"]
+material = SubResource("ShaderMaterial_rrw1g")
+texture = ExtResource("2_m3tth")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="View/Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_3almi")
+}
+autoplay = "idle"
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_0jou6")]
+
+[node name="StatsComponent" parent="." instance=ExtResource("4_3almi")]
+stats = ExtResource("5_dwmll")
+
+[node name="PathfindComponent" parent="." instance=ExtResource("6_72gs6")]
+
+[node name="MobMovement" parent="." node_paths=PackedStringArray("velocity_component", "stats_component") instance=ExtResource("3_0jou6")]
+velocity_component = NodePath("../VelocityComponent")
+stats_component = NodePath("../StatsComponent")
+
+[node name="Hitbox" parent="." instance=ExtResource("7_3almi")]
+damage = 20
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource("CircleShape2D_dwmll")
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("5_8tkg6")]
+stats_component = NodePath("../StatsComponent")
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource("CircleShape2D_m4nbs")
+
+[node name="Healthbar" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("10_m4nbs")]
+stats_component = NodePath("../StatsComponent")
+
+[connection signal="received_damage" from="Hurtbox" to="." method="_on_hurtbox_received_damage"]
+
+[editable path="Hitbox"]
+[editable path="Hurtbox"]

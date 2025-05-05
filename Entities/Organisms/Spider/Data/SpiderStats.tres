@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Stats" load_steps=2 format=3 uid="uid://bbpdxs7yx7bie"]
+
+[ext_resource type="Script" uid="uid://cr3akyvtvgi24" path="res://Common/Combat/Stats/Stats.gd" id="1_swojt"]
+
+[resource]
+script = ExtResource("1_swojt")
+speed = 400
+health = 100
+hunger = 100
+thirst = 100
+warmth = 100
+metadata/_custom_type_script = "uid://cr3akyvtvgi24"
