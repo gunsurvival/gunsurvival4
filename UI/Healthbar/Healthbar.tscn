@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bl3nq5k5nte3g"]
+
+[ext_resource type="Script" uid="uid://swsyur77i7tb" path="res://UI/Healthbar/Healthbar.gd" id="1_dxqh2"]
+
+[node name="Healthbar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_dxqh2")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -43.0
+offset_top = -110.0
+offset_right = 43.0
+offset_bottom = -83.0
+text = "100"
+horizontal_alignment = 1
