@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=3 uid="uid://b6o83k24iq0ip"]
+
+[ext_resource type="Script" uid="uid://b5yq6xi01fa38" path="res://Entities/Items/Tools/Sword/Sword.gd" id="1_0t01n"]
+[ext_resource type="Texture2D" uid="uid://cdjw7d0b6yfa3" path="res://Entities/Items/Tools/Sword/Art/longcut-gif/frame_0_delay-0.1s.png" id="2_88e15"]
+[ext_resource type="Texture2D" uid="uid://cq6dvqbvr8p3e" path="res://Entities/Items/Tools/Sword/Art/longcut-gif/frame_1_delay-0.1s.png" id="3_85lmv"]
+[ext_resource type="Texture2D" uid="uid://bwgoflr22aymw" path="res://Entities/Items/Tools/Sword/Art/longcut-gif/frame_2_delay-0.1s.png" id="4_krtvq"]
+[ext_resource type="Texture2D" uid="uid://b2wwnwqw0i4cf" path="res://Entities/Items/Tools/Sword/Art/longcut-gif/frame_3_delay-0.1s.png" id="5_r38v4"]
+[ext_resource type="Texture2D" uid="uid://bx3b1p2gt5ytk" path="res://Entities/Items/Tools/Sword/Art/longcut-gif/frame_4_delay-0.1s.png" id="6_x75vh"]
+[ext_resource type="Texture2D" uid="uid://defkwtc366qay" path="res://Entities/Items/Tools/Sword/Art/longcut-gif/frame_5_delay-0.1s.png" id="7_4lrmf"]
+[ext_resource type="Texture2D" uid="uid://bq37h4xak4jmj" path="res://Entities/Items/Tools/Sword/Art/longcut-gif/frame_6_delay-0.1s.png" id="8_bd0n6"]
+[ext_resource type="Texture2D" uid="uid://b67kpqjtat0km" path="res://Entities/Items/Tools/Sword/Art/longcut-gif/frame_7_delay-0.1s.png" id="9_kw5wa"]
+[ext_resource type="PackedScene" uid="uid://c443w28ln1e44" path="res://Common/Combat/Hitbox/Hitbox.tscn" id="10_88e15"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fuatl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_88e15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_85lmv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_krtvq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_r38v4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_x75vh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_4lrmf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_bd0n6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_kw5wa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_88e15")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_88e15")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_88e15"]
+radius = 22.0
+height = 82.0
+
+[node name="Sword" type="Node2D"]
+script = ExtResource("1_0t01n")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 10
+position = Vector2(56, 27)
+scale = Vector2(2.598, 2.598)
+sprite_frames = SubResource("SpriteFrames_fuatl")
+animation = &"attack"
+
+[node name="Hitbox" parent="." instance=ExtResource("10_88e15")]
+damage = 10
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(62, 28)
+shape = SubResource("CapsuleShape2D_88e15")
+debug_color = Color(0.93582, 0.155949, 0.50345, 0.42)
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+
+[editable path="Hitbox"]
