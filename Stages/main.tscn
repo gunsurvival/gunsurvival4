@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://bt6akfa137g4w"]
+
+[ext_resource type="PackedScene" uid="uid://t46jufw1t16a" path="res://Entities/Terrorist/player.tscn" id="1_itxqv"]
+[ext_resource type="Script" uid="uid://dlrou2yidobgu" path="res://Stages/main.gd" id="1_v0l8b"]
+[ext_resource type="Script" uid="uid://bnxagjs84a65j" path="res://Common/Generator/spawn_mob.gd" id="2_fyndt"]
+[ext_resource type="Script" uid="uid://bc5favg85nct8" path="res://Common/Controller/controller.gd" id="3_fyndt"]
+[ext_resource type="PackedScene" uid="uid://cij5cwmh1djkb" path="res://Entities/Wolf/wolf.tscn" id="5_0ha60"]
+[ext_resource type="PackedScene" uid="uid://djaoeh446m65a" path="res://Entities/Spider/spider.tscn" id="6_kmhfv"]
+[ext_resource type="PackedScene" uid="uid://by7mb3h7bfsxf" path="res://Entities/Rock/rock.tscn" id="7_rlaii"]
+[ext_resource type="PackedScene" uid="uid://b10uvnaxmm5mv" path="res://Entities/Bush/bush.tscn" id="8_5mrjc"]
+
+[sub_resource type="Environment" id="Environment_fyndt"]
+background_mode = 1
+background_color = Color(0.0745098, 0.227451, 0.168627, 1)
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_v0l8b")
+
+[node name="spawn_mob" type="Node" parent="." node_paths=PackedStringArray("entities")]
+script = ExtResource("2_fyndt")
+entities = NodePath("../entities")
+
+[node name="Timer" type="Timer" parent="spawn_mob"]
+wait_time = 5.0
+
+[node name="controller" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("3_fyndt")
+player = NodePath("../entities/player")
+
+[node name="entities" type="Node" parent="."]
+
+[node name="player" parent="entities" instance=ExtResource("1_itxqv")]
+position = Vector2(-1, 0)
+
+[node name="Camera2D" type="Camera2D" parent="entities/player"]
+process_callback = 0
+position_smoothing_enabled = true
+
+[node name="Rock" parent="entities" instance=ExtResource("7_rlaii")]
+position = Vector2(339, -167)
+
+[node name="Rock2" parent="entities" instance=ExtResource("7_rlaii")]
+position = Vector2(433, 129)
+
+[node name="Bush" parent="entities" instance=ExtResource("8_5mrjc")]
+position = Vector2(-209, -188)
+
+[node name="Bush2" parent="entities" instance=ExtResource("8_5mrjc")]
+position = Vector2(-252, 130)
+
+[node name="Spider" parent="entities" instance=ExtResource("6_kmhfv")]
+position = Vector2(-35, 290)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fyndt")
+
+[node name="Wolf" parent="." instance=ExtResource("5_0ha60")]
+position = Vector2(232, 225)
+
+[connection signal="timeout" from="spawn_mob/Timer" to="spawn_mob" method="_on_timer_timeout"]

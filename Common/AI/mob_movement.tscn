@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://4ucqea8t27qx"]
+
+[ext_resource type="Script" uid="uid://bth2w12l043kj" path="res://Common/AI/mob_movement.gd" id="1_ikupf"]
+[ext_resource type="PackedScene" uid="uid://q8gy2f0yh6x4" path="res://Common/State Machine/state_machine.tscn" id="2_ylcsi"]
+[ext_resource type="Script" uid="uid://2ny8pf6t8tlt" path="res://Common/AI/State/mob_movement_normal.gd" id="3_pnc67"]
+[ext_resource type="Script" uid="uid://v2kfkc5rn0c2" path="res://Common/AI/State/mob_movement_aggressive.gd" id="4_ylcsi"]
+
+[node name="MobMovement" type="Node2D"]
+script = ExtResource("1_ikupf")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.7
+autostart = true
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("2_ylcsi")]
+initial_state = NodePath("Normal")
+
+[node name="Normal" type="Node" parent="StateMachine"]
+script = ExtResource("3_pnc67")
+
+[node name="Aggressive" type="Node" parent="StateMachine"]
+script = ExtResource("4_ylcsi")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
