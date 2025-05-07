@@ -40,12 +40,21 @@ func set_body(item: Item) -> void:
 
 func set_lefthand(item: Item) -> void:
 	lefthand = item
+	item.visible = true
+	item.rotation = +PI/16
+	item.position.x = 70
+	item.position.y = -20
 	lefthand.emit_signal("holded")
 
 func set_righthand(item: Item) -> void:
 	righthand = item
+	item.visible = true
+	item.rotation = -PI/16
+	item.position.x = 70
+	item.position.y = 20
 	righthand.emit_signal("holded")
 
 func add_accessory(item: Item) -> void:
-	accessories.append(item)
 	item.equipment = self
+	item.visible = false
+	accessories.append(item)
