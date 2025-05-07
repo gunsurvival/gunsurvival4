@@ -22,6 +22,7 @@ func _on_area_entered(area:Area2D) -> void:
 
 	if area is Hitbox and !area.disabled:
 		emit_signal("received_damage", area.damage)
+		area.emit_signal("hit")
 		print("Received damage: ", area.damage)
 		stats_component.stats.health -= area.damage
 		return

@@ -1,6 +1,8 @@
 extends Area2D
 class_name Hitbox
 
+signal hit()
+
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 @export var damage: int = 0
