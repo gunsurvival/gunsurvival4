@@ -1,4 +1,5 @@
-extends TextureRect
+extends Control
 class_name ItemSlot
 
-@onready var thumbnail: TextureRect = $Thumbnail
+@onready var thumbnail: TextureRect = $CenterContainer/Thumbnail
+@onready var texture_rect: TextureRect = $TextureRect
