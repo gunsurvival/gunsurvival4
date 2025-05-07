@@ -61,4 +61,6 @@ position = Vector2(232, 225)
 [node name="HUD" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_nci84")]
 player = NodePath("../entities/player")
 
+[node name="bullets" type="Node" parent="."]
+
 [connection signal="timeout" from="spawn_mob/Timer" to="spawn_mob" method="_on_timer_timeout"]
