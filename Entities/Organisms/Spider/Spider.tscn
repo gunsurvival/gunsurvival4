@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://djaoeh446m65a"]
+[gd_scene load_steps=15 format=3 uid="uid://djaoeh446m65a"]
 
 [ext_resource type="Script" uid="uid://dn5bxe3sk08cf" path="res://Entities/Organisms/Spider/Spider.gd" id="1_bxjw4"]
 [ext_resource type="PackedScene" uid="uid://barbv746hxtac" path="res://Common/Velocity/VelocityComponent.tscn" id="2_m8vx2"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bt3rmvvkca022" path="res://Common/AI/Pathfind.tscn" id="6_b4xjd"]
 [ext_resource type="PackedScene" uid="uid://41yqj0q6h5v7" path="res://Common/Combat/Stats/StatsComponent.tscn" id="7_8xkrg"]
 [ext_resource type="PackedScene" uid="uid://dxcvcw5qb66rq" path="res://Common/Combat/Hurtbox/Hurtbox.tscn" id="9_ps66m"]
+[ext_resource type="PackedScene" uid="uid://bl3nq5k5nte3g" path="res://UI/Healthbar/Healthbar.tscn" id="10_pojgy"]
 
 [sub_resource type="Animation" id="Animation_3b622"]
 resource_name = "idle"
@@ -78,6 +79,9 @@ stats_component = NodePath("../StatsComponent")
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_pojgy")
+
+[node name="Healthbar" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("10_pojgy")]
+stats_component = NodePath("../StatsComponent")
 
 [editable path="Hitbox"]
 [editable path="Hurtbox"]

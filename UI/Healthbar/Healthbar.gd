@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 
 @export var stats_component: StatsComponent
 @onready var label: Label = $Label

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cesw7sebn1qt0"]
+
+[ext_resource type="Texture2D" uid="uid://lllset1rnx2p" path="res://UI/HUD/ItemSlot/Art/Spritesheet_UI_Flat_Animated/Spritesheet_UI_Flat_Animated-14.png" id="1_00smp"]
+[ext_resource type="Script" uid="uid://c3nbghaqygxoj" path="res://UI/HUD/ItemSlot/ItemSlot.gd" id="2_tstfg"]
+
+[node name="ItemSlot" type="TextureRect"]
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(1.8, 1.77541)
+texture = ExtResource("1_00smp")
+script = ExtResource("2_tstfg")
+
+[node name="Thumbnail" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = -4.0
+offset_right = 29.0
+offset_bottom = 34.0

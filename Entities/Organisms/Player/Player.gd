@@ -7,11 +7,11 @@ class_name Player
 @onready var animation_player: AnimationPlayer = $Sprite2D/AnimationPlayer
 
 func _physics_process(_delta: float) -> void:
-	item_manager.scale.y = sign(cos(rotation))
 	move_and_slide()
 
 func _process(_delta: float) -> void:
-	item_manager.scale.y = sign(cos(rotation))
+	pass
+	# item_manager.scale.y = sign(cos(rotation))
 
 
 func _on_hurtbox_received_damage(damage: int) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bt6akfa137g4w"]
+[gd_scene load_steps=11 format=3 uid="uid://bt6akfa137g4w"]
 
 [ext_resource type="PackedScene" uid="uid://t46jufw1t16a" path="res://Entities/Organisms/Player/Player.tscn" id="1_itxqv"]
 [ext_resource type="Script" uid="uid://dlrou2yidobgu" path="res://Stages/BaseStage.gd" id="1_v0l8b"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://djaoeh446m65a" path="res://Entities/Organisms/Spider/Spider.tscn" id="6_kmhfv"]
 [ext_resource type="PackedScene" uid="uid://by7mb3h7bfsxf" path="res://Entities/Environment/Rock/Rock.tscn" id="7_rlaii"]
 [ext_resource type="PackedScene" uid="uid://b10uvnaxmm5mv" path="res://Entities/Environment/Bush/Bush.tscn" id="8_5mrjc"]
+[ext_resource type="PackedScene" uid="uid://dh54taebjt11f" path="res://UI/HUD/HUD.tscn" id="9_nci84"]
 
 [sub_resource type="Environment" id="Environment_fyndt"]
 background_mode = 1
@@ -56,5 +57,8 @@ environment = SubResource("Environment_fyndt")
 
 [node name="Wolf" parent="." instance=ExtResource("5_0ha60")]
 position = Vector2(232, 225)
+
+[node name="HUD" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_nci84")]
+player = NodePath("../entities/player")
 
 [connection signal="timeout" from="spawn_mob/Timer" to="spawn_mob" method="_on_timer_timeout"]

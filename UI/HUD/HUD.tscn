@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh54taebjt11f"]
+
+[ext_resource type="PackedScene" uid="uid://cesw7sebn1qt0" path="res://UI/HUD/ItemSlot/ItemSlot.tscn" id="1_0ktxb"]
+[ext_resource type="Script" uid="uid://cb3mwbbp3hcyk" path="res://UI/HUD/HUD.gd" id="1_53dev"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_53dev")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -216.0
+offset_top = -96.0
+offset_right = 1.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2, 2)
+alignment = 1
+
+[node name="ItemSlot" parent="HBoxContainer" instance=ExtResource("1_0ktxb")]
+layout_mode = 2
+
+[node name="ItemSlot2" parent="HBoxContainer" instance=ExtResource("1_0ktxb")]
+layout_mode = 2
