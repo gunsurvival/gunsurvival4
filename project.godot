@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="test topdown"
+config/name="gunsurvival4"
 run/main_scene="uid://bt6akfa137g4w"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="uid://dbyitlefc6ow8"
