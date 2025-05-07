@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1qs7b1d3wjt2"]
+
+[ext_resource type="Script" uid="uid://2qq4texyoh4" path="res://Entities/Items/Other/Bullet/Bullet.gd" id="1_i22qc"]
+[ext_resource type="Texture2D" uid="uid://bryeb28um05si" path="res://Entities/Items/Other/Bullet/Art/paint-bullet.png" id="1_ud44d"]
+[ext_resource type="Script" uid="uid://c3dxj5le55xkj" path="res://Common/Velocity/VelocityComponent.gd" id="3_plqtl"]
+[ext_resource type="PackedScene" uid="uid://c443w28ln1e44" path="res://Common/Combat/Hitbox/Hitbox.tscn" id="4_plqtl"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_i22qc"]
+friction = 0.5
+bounce = 0.7
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ud44d"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b24ns"]
+radius = 9.05539
+
+[node name="Bullet" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_i22qc")
+gravity_scale = 0.0
+script = ExtResource("1_i22qc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ud44d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 1.00326)
+shape = SubResource("CircleShape2D_ud44d")
+
+[node name="VelocityComponent" type="Node2D" parent="."]
+script = ExtResource("3_plqtl")
+metadata/_custom_type_script = "uid://c3dxj5le55xkj"
+
+[node name="Hitbox" parent="." instance=ExtResource("4_plqtl")]
+damage = 10
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+scale = Vector2(1, 1.04975)
+shape = SubResource("CircleShape2D_b24ns")
+
+[connection signal="hit" from="Hitbox" to="." method="_on_hitbox_hit"]
+
+[editable path="Hitbox"]

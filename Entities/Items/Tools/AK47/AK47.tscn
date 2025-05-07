@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://qa1jk2ggmck3"]
+
+[ext_resource type="Script" uid="uid://b070q0h775hvs" path="res://Entities/Items/Tools/AK47/AK47.gd" id="1_k11jh"]
+[ext_resource type="Texture2D" uid="uid://ckl86jgyukcux" path="res://Assets/ak47.png" id="2_hqay5"]
+
+[node name="Ak47" type="Node2D"]
+script = ExtResource("1_k11jh")
+time_to_use = 0.1
+thumbnail = ExtResource("2_hqay5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.189891, 0.189891)
+texture = ExtResource("2_hqay5")
+
+[connection signal="used" from="." to="." method="_on_used"]
