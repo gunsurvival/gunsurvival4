@@ -3,7 +3,7 @@ class_name Player
 
 @onready var stats_component: StatsComponent = $StatsComponent
 @onready var velocity_component: VelocityComponent = $VelocityComponent
-@onready var item_manager: ItemManager = $ItemManager
+@onready var equipment: Equipment = $Equipment
 @onready var animation_player: AnimationPlayer = $Sprite2D/AnimationPlayer
 
 func _physics_process(_delta: float) -> void:
