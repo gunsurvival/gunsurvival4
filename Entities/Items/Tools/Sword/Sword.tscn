@@ -76,6 +76,7 @@ rotation = -1.57079
 shape = SubResource("ConvexPolygonShape2D_88e15")
 debug_color = Color(0.93582, 0.155949, 0.50345, 0.42)
 
+[connection signal="used" from="." to="." method="_on_used"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 
 [editable path="Hitbox"]
