@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbo3pffdccal3"]
+
+[ext_resource type="Script" uid="uid://uwgnrf0iypgq" path="res://Common/Equipment/equipment.gd" id="1_jj360"]
+
+[node name="Equipment" type="Node2D"]
+script = ExtResource("1_jj360")
