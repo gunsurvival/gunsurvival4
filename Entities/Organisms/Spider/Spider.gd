@@ -3,7 +3,7 @@ class_name Spider
 
 @onready var mob_movement: MobMovement = $MobMovement
 @onready var velocity_component: VelocityComponent = $VelocityComponent
-
+@onready var animation_player: AnimationPlayer = $View/Sprite2D/AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,3 +20,7 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		pass
+
+
+func _on_hurtbox_received_damage(damage:int) -> void:
+	animation_player.play("hit")

@@ -1,8 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://djaoeh446m65a"]
+[gd_scene load_steps=18 format=3 uid="uid://djaoeh446m65a"]
 
 [ext_resource type="Script" uid="uid://dn5bxe3sk08cf" path="res://Entities/Organisms/Spider/Spider.gd" id="1_bxjw4"]
 [ext_resource type="PackedScene" uid="uid://barbv746hxtac" path="res://Common/Velocity/VelocityComponent.tscn" id="2_m8vx2"]
 [ext_resource type="Texture2D" uid="uid://bamwsqqjqhjt" path="res://Entities/Organisms/Spider/Art/spider.png" id="2_m66c0"]
+[ext_resource type="Shader" uid="uid://c5cqg4mdkdcsk" path="res://Common/Shaders/Flash.gdshader" id="2_pxksx"]
+[ext_resource type="Animation" uid="uid://diwc4dvom6srn" path="res://Common/Animations/hit.res" id="3_akc06"]
 [ext_resource type="PackedScene" uid="uid://c443w28ln1e44" path="res://Common/Combat/Hitbox/Hitbox.tscn" id="4_8c2cm"]
 [ext_resource type="PackedScene" uid="uid://4ucqea8t27qx" path="res://Common/AI/MobMovement.tscn" id="5_7x44o"]
 [ext_resource type="Resource" uid="uid://bbpdxs7yx7bie" path="res://Entities/Organisms/Spider/Data/SpiderStats.tres" id="5_ps66m"]
@@ -10,6 +12,11 @@
 [ext_resource type="PackedScene" uid="uid://41yqj0q6h5v7" path="res://Common/Combat/Stats/StatsComponent.tscn" id="7_8xkrg"]
 [ext_resource type="PackedScene" uid="uid://dxcvcw5qb66rq" path="res://Common/Combat/Hurtbox/Hurtbox.tscn" id="9_ps66m"]
 [ext_resource type="PackedScene" uid="uid://bl3nq5k5nte3g" path="res://UI/Healthbar/Healthbar.tscn" id="10_pojgy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mlpio"]
+shader = ExtResource("2_pxksx")
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+shader_parameter/flash_value = 0.0
 
 [sub_resource type="Animation" id="Animation_3b622"]
 resource_name = "idle"
@@ -29,6 +36,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b4xjd"]
 _data = {
+&"hit": ExtResource("3_akc06"),
 &"idle": SubResource("Animation_3b622")
 }
 
@@ -46,6 +54,7 @@ script = ExtResource("1_bxjw4")
 [node name="View" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="View"]
+material = SubResource("ShaderMaterial_mlpio")
 position = Vector2(29, -2)
 texture = ExtResource("2_m66c0")
 
@@ -82,6 +91,8 @@ shape = SubResource("CapsuleShape2D_pojgy")
 
 [node name="Healthbar" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("10_pojgy")]
 stats_component = NodePath("../StatsComponent")
+
+[connection signal="received_damage" from="Hurtbox" to="." method="_on_hurtbox_received_damage"]
 
 [editable path="Hitbox"]
 [editable path="Hurtbox"]
