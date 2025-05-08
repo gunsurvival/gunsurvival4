@@ -5,18 +5,18 @@ var ItemSlotScene: PackedScene = preload("res://UI/HUD/ItemSlot/ItemSlot.tscn")
 
 @export var max_slots: int = 8
 @export var player: Player
-@onready var hbox_container: HBoxContainer = $HBoxContainer
+@onready var item_bar: HBoxContainer = $ItemBar
 
 func _ready() -> void:
 	player.equipment.connect("slot_changed", _on_slot_changed)
 
 	for i in range(max_slots):
-		var child = hbox_container.get_child(i)
+		var child = item_bar.get_child(i)
 
 		if child == null:
 			child = ItemSlotScene.instantiate()
 			child.owner = self
-			hbox_container.add_child(child)
+			item_bar.add_child(child)
 
 		if child is ItemSlot and i < player.equipment.accessories.size():
 			child.thumbnail.texture = resize_texture_to_fit(player.equipment.accessories[i].thumbnail, Vector2i(child.texture_rect.get_size().x - 10, child.texture_rect.get_size().y))
@@ -65,7 +65,7 @@ func choose_slot(index: int) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
-		var slot_count = hbox_container.get_child_count()
+		var slot_count = item_bar.get_child_count()
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			player.equipment.current_slot = (player.equipment.current_slot - 1 + slot_count) % slot_count
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
@@ -73,8 +73,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_slot_changed() -> void:
-	for i in range(hbox_container.get_child_count()):
-		var slot = hbox_container.get_child(i)
+	for i in range(item_bar.get_child_count()):
+		var slot = item_bar.get_child(i)
 		if slot is ItemSlot:
 			if i == player.equipment.current_slot:
 				slot.texture_rect.modulate = Color(1, 1, 1, 1)  # Fully visible
