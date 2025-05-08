@@ -9,7 +9,6 @@ func _ready() -> void:
 
 func _on_animated_sprite_2d_frame_changed() -> void:
 	if animated_sprite_2d.frame == 4:
-		print("sword hitbox enabled")
 		hitbox.disabled = false
 	else:
 		hitbox.disabled = true
@@ -18,4 +17,3 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 
 func _on_used() -> void:
 	animated_sprite_2d.play("attack")
-	print("Sword used!")

@@ -1,12 +1,15 @@
 extends Node2D
 class_name Equipment
 
+signal slot_changed
+
 @export var stats: StatsComponent
 @export var head: Item: set = set_head
 @export var body: Item: set = set_body
 @export var hand: Item: set = set_hand
 @export var accessories: Array[Item] = []
 
+var current_slot: int = -1 : set = set_current_slot
 
 func _ready() -> void:
 	for item_node: Item in find_children("*", "Item"):
@@ -58,9 +61,13 @@ func _switch_from_to(current: Item, to: Item) -> void:
 		to.emit_signal("holded")
 
 
-func switch_to_index(index: int) -> void:
-	if index < 0 or index >= accessories.size():
-		hand = null
-		return
+func set_current_slot(index: int) -> void:
+	if index != current_slot:
+		current_slot = index
+		emit_signal("slot_changed")
 
-	hand = accessories[index]
+		if index < 0 or index >= accessories.size():
+			hand = null
+		else:
+			hand = accessories[index]
+	
