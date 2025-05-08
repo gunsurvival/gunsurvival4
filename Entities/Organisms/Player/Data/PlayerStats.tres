@@ -5,8 +5,9 @@
 [resource]
 script = ExtResource("1_3in4a")
 speed = 300
-health = 100
-hunger = 100
-thirst = 100
-warmth = 100
+max_speed = 350
+max_health = 100
+max_hunger = 100
+max_thirst = 100
+max_warmth = 100
 metadata/_custom_type_script = "uid://cr3akyvtvgi24"

@@ -15,6 +15,5 @@ func _process(_delta: float) -> void:
 
 
 func _on_hurtbox_received_damage(damage: int) -> void:
-	print("Received damage: ", damage, owner)
 	animation_player.play("hit")
 	pass # Replace with function body.
