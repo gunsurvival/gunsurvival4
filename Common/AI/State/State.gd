@@ -1,13 +1,7 @@
 extends State
 class_name MobMovementState
 
-enum STATE {
-	NORMAL,
-	AGGRESSIVE,
-}
-
 var mob_movement: MobMovement
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -4,9 +4,11 @@ func enter(previous_state_path: String, data := {}) -> void:
 	pass
 
 func _on_timer_timeout() -> void:
+	mob_movement.timer.wait_time = 0.2
 	var actions = ["idle", "move"]
 	var random_action = randi() % actions.size()
 	mob_movement.locker = !mob_movement.locker
+	print("NIGGA")
 	if mob_movement.locker:
 		mob_movement.currentSpeed = 0
 		return
