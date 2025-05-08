@@ -5,6 +5,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# hud.connect("outside_click", _on_outside_click)
 	pass # Replace with function body.
 
 
@@ -16,7 +17,10 @@ func _process(_delta: float) -> void:
 	player.rotation = lerp_angle(player.rotation, toAngle, 0.1)
 	player.velocity_component.velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down") * player.stats_component.stats.speed
 
+
+func _unhandled_input(_event) -> void:
 	if Input.is_action_just_pressed("left_click"):
 		player.equipment.hand_trigger()
+
 	if Input.is_action_just_released("left_click"):
 		player.equipment.hand_stop_trigger()
