@@ -5,7 +5,7 @@
 
 [node name="Ak47" type="Node2D"]
 script = ExtResource("1_k11jh")
-time_to_use = 0.1
+time_to_use = 0.2
 thumbnail = ExtResource("2_hqay5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
