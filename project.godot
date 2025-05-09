@@ -101,6 +101,11 @@ slot9={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="hitbox_hurtbox"
+2d_physics/layer_2="human"
+
 [physics]
 
 2d/default_gravity_vector=Vector2(0, 0)
