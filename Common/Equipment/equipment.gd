@@ -9,6 +9,8 @@ signal slot_changed
 @export var hand: Item: set = set_hand
 @export var accessories: Array[Item] = []
 
+var hand_triggering: bool = false
+
 var current_slot: int = -1 : set = set_current_slot
 
 func _ready() -> void:
@@ -17,11 +19,13 @@ func _ready() -> void:
 
 
 func hand_trigger() -> void:
+	hand_triggering = true
 	if hand != null:
 		hand.trigger()
 
 
 func hand_stop_trigger() -> void:
+	hand_triggering = false
 	if hand != null:
 		hand.stop_trigger()
 
@@ -50,15 +54,16 @@ func add_accessory(item: Item) -> void:
 func _switch_from_to(current: Item, to: Item) -> void:
 	if current != null:
 		current.visible = false
-		current.is_triggering = false
 		current.stop_trigger()
 
-	if to != null:	
+	if to != null:
 		to.visible = true
 		to.rotation = -PI/16
 		to.position.x = 70
 		to.position.y = 20
 		to.emit_signal("holded")
+		if hand_triggering:
+			to.trigger()
 
 
 func set_current_slot(index: int) -> void:
@@ -70,4 +75,8 @@ func set_current_slot(index: int) -> void:
 			hand = null
 		else:
 			hand = accessories[index]
+	else:
+		hand = null
+		current_slot = -1
+		emit_signal("slot_changed")
 	

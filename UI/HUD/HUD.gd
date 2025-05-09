@@ -15,7 +15,7 @@ func _ready() -> void:
 
 		if child == null:
 			child = ItemSlotScene.instantiate()
-			child.owner = self
+			child.hud = self
 			item_bar.add_child(child)
 
 		if child is ItemSlot and i < player.equipment.accessories.size():

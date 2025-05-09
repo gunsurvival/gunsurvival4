@@ -10,7 +10,7 @@ func _ready() -> void:
 	# await owner.ready
 	if owner is HUD:
 		hud = owner as HUD
-	# assert(hud, "ItemSlot must be a child of HUD")
+	assert(hud, "ItemSlot must be a child of HUD")
 
 func _on_pressed() -> void:
 	var index = get_index()
