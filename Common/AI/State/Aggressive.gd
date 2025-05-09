@@ -1,23 +1,30 @@
 extends MobMovementState
 
-func enter(previous_state_path: String, data := {}) -> void:
-	pass
+@export var more_sight = 0.1
 
-func _on_timer_timeout() -> void:
-	mob_movement.timer.wait_time = 0.2
-	var actions = ["idle", "move"]
-	var random_action = randi() % actions.size()
-	mob_movement.locker = !mob_movement.locker
-	print("NIGGA")
-	if mob_movement.locker:
-		mob_movement.currentSpeed = 0
-		return
+func enter(_previous_state_path: String, _data := {}) -> void:
+	(mob_movement.collision_shape.shape as CircleShape2D).radius *=  1 + more_sight
 
-	match random_action:
-		"idle":
-			mob_movement.toRotation = randf_range(0, 2*PI)
+func exit() -> void:
+	(mob_movement.collision_shape.shape as CircleShape2D).radius /= 1 + more_sight
+
+
+func physics_update(delta: float) -> void:
+	mob_movement.delta_accumulator += delta
+
+	if mob_movement.delta_accumulator >= mob_movement.update_interval:
+		mob_movement.locker = !mob_movement.locker
+		mob_movement.delta_accumulator = 0.0
+
+		if mob_movement.locker:
+			if mob_movement.player_follow != null:
+				# The farther the player is, the faster the mob moves (less time to locker)
+				mob_movement.delta_accumulator = clamp(mob_movement.owner.position.distance_to(mob_movement.player_follow.position) / mob_movement.stats_component.stats.speed, 0.0, 1) * mob_movement.update_interval/2
+				print(mob_movement.delta_accumulator)
 			mob_movement.currentSpeed = 0
+			return
 
-		"move":
-			mob_movement.toRotation = randf_range(0, 2*PI)
-			mob_movement.currentSpeed = (randi() % 2) * mob_movement.stats_component.stats.speed
+		mob_movement.currentSpeed = mob_movement.stats_component.stats.speed
+
+		if mob_movement.player_follow != null:
+			mob_movement.toRotation = mob_movement.owner.position.angle_to_point(mob_movement.player_follow.position)

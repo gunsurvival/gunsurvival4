@@ -4,10 +4,10 @@
 
 [resource]
 script = ExtResource("1_swojt")
-speed = 120
+speed = 150
 max_speed = 150
 max_health = 150
 max_hunger = 100
-max_thirst = 100
 max_warmth = 100
+max_thirst = 100
 metadata/_custom_type_script = "uid://cr3akyvtvgi24"

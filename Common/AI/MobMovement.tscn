@@ -6,14 +6,11 @@
 [ext_resource type="Script" uid="uid://v2kfkc5rn0c2" path="res://Common/AI/State/Aggressive.gd" id="4_ylcsi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8e4cv"]
-radius = 326.098
+resource_local_to_scene = true
+radius = 253.018
 
 [node name="MobMovement" type="Node2D"]
 script = ExtResource("1_ikupf")
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.7
-autostart = true
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("2_ylcsi")]
 initial_state = NodePath("Normal")
@@ -24,9 +21,6 @@ script = ExtResource("3_pnc67")
 [node name="Aggressive" type="Node" parent="StateMachine"]
 script = ExtResource("4_ylcsi")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(151, -1)
-
 [node name="SightScan" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
@@ -36,5 +30,5 @@ shape = SubResource("CircleShape2D_8e4cv")
 
 [node name="Raycasts" type="Node2D" parent="."]
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="SightScan" to="." method="_on_sight_scan_body_entered"]
+[connection signal="body_exited" from="SightScan" to="." method="_on_sight_scan_body_exited"]
