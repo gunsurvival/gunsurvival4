@@ -31,6 +31,5 @@ func _draw():
 
 func _physics_process(delta: float) -> void:
 	if hud != null:
-		# print(hud.player.stats_component.stats.health, hud.player.stats_component.stats.max_health)
 		progress_bar.value = hud.player.stats_component.stats[follow_stat] / float(hud.player.stats_component.stats["max_" + follow_stat]) * 100
 			

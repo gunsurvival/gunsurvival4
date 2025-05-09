@@ -20,7 +20,6 @@ func physics_update(delta: float) -> void:
 			if mob_movement.player_follow != null:
 				# The farther the player is, the faster the mob moves (less time to locker)
 				mob_movement.delta_accumulator = clamp(mob_movement.owner.position.distance_to(mob_movement.player_follow.position) / mob_movement.stats_component.stats.speed, 0.0, 1) * mob_movement.update_interval/2
-				print(mob_movement.delta_accumulator)
 			mob_movement.currentSpeed = 0
 			return
 

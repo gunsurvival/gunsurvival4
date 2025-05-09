@@ -53,13 +53,7 @@ func _physics_process(_delta: float) -> void:
 				if collider is Player:
 					player_follow = collider
 					state_machine.state.finished.emit(StateAggressive)
-					print("Player in sight, enter racist  mode")
 					return
-
-		# if state_machine.state.name == StateAggressive:
-		# 	state_machine.state.finished.emit(StateNormal)
-		# 	print("Player out of sight, enter normal mode")
-		# 	return
 
 
 func _on_sight_scan_body_entered(body: Node2D) -> void:
@@ -75,4 +69,3 @@ func _on_sight_scan_body_exited(body: Node2D) -> void:
 		player_in_sight -= 1
 		if player_in_sight == 0:
 			state_machine.state.finished.emit(StateNormal)
-			print("Player out of sight, enter normal mode")
